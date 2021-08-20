@@ -1,0 +1,31 @@
+extends ../layouts/layout.pug
+block titles
+    title Admin Product
+
+
+block styles
+    link(rel="stylesheet", href="/css/product.css")
+
+block content 
+    main
+        if products.length > 0
+            .grid
+                each product in products
+                    -var img= product.imageUrl
+                    -var imageName=product.title
+                    article.card.product-item
+                        header.card__header
+                            h1.product__title #{product.title}
+                        div.card__image
+                            img(src=img, alt=imageName)
+                        div.card__content
+                            h2.product__price Rs #{product.price}
+                            p.product__description #{product.description}
+                        .card__actions
+                            a(href=`/admin/edit-product/${product.id}?edit=true`) 
+                                button.btn Edit
+                            form(action=`/admin/delete-product` method="POST") 
+                                input(type="hidden", name="id",value=product.id)
+                                button.btn(type="submit") Delete 
+        else
+            h1 No Products

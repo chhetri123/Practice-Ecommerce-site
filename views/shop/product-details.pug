@@ -1,0 +1,20 @@
+extends ../layouts/layout.pug
+
+block titles
+    title #{product.title}
+
+
+block styles
+    link(rel="stylesheet", href="/css/product.css")
+
+block content
+    -var imageUrl=product.imageUrl
+    main.centered
+        h1 #{product.title}
+        hr
+        div 
+            img(src=imageUrl, alt="title")
+        h2 #{product.price}
+        p #{product.description}
+        include ../layouts/add-to-cart.pug
+
